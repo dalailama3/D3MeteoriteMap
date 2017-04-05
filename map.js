@@ -43,7 +43,7 @@ $("document").ready(function () {
           g.selectAll(".dot")
             .data(result.features)
             .enter().append("circle")
-            // .call(tip)
+            .call(tip)
             .attr("class", "dot")
             .attr("cx", function (d) {
 
@@ -68,51 +68,9 @@ $("document").ready(function () {
               }
             })
             .attr("fill", "red")
+            .on("mouseover", tip.show)
+            .on("mouseout", tip.hide)
 
-
-          // svg.selectAll(".dot")
-          //   .data(result.features)
-            .on("mouseover", function(d) {   //Add tooltip on mouseover for each circle
-
-         //Get this county's x/y values, then augment for the tooltip
-               var xPosition = d3.select(this).attr("x");
-               var yPosition = d3.select(this).attr("y");
-
-         //Update the tooltip position and value
-              d3.select(".tooltip")
-           //Show the tooltip above where the mouse triggers the event
-              .style("left", (d3.event.pageX) + "px")
-                   .style("top", (d3.event.pageY - 70) + "px")
-           //CSV data has been bound to JSON at this point - so values must be referenced from JSON properties
-                    .html("<strong>" + d.properties.mass + "</strong>" + "<br/>" + "Fall: " + d.properties.fall)
-
-         //Show the tooltip
-            d3.select(".tooltip").classed("hidden", false);
-
-        })
-        .on("mouseout", function() {
-
-         //Hide the tooltip
-         d3.select(".tooltip").classed("hidden", true);
-
-        })
-            // .on("mouseover", tip.show)
-            // .on("mouseout", tip.hide)
-            // .on("mousemove", function (d, i) {
-            //   // console.log(d.properties)
-            //   var mouse = d3.mouse(svg.node()).map( function (d) { return parseInt(d); })
-            //   var props = d.properties;
-            //   tooltip
-            //     .classed("hidden", false)
-            //     .attr("style", "left:" + (mouse[0] + 25) + "px;top:" + mouse[1] + "px")
-            //     .html("<span>" + "Fall: " + props.fall + "</span>")
-            // })
-            // .on("mouseout", function (d, i) {
-            //   tooltip.classed("hidden", true)
-            // })
-          // $("g .dot").on("mouseover", function () {
-          //   console.log(this)
-          // })
 
     });
 
@@ -125,8 +83,6 @@ $("document").ready(function () {
       var properties = d.properties;
       return "<span>" + properties.mass + "</span>";
     })
-    var tooltip = d3.select("body").append("div")
-      .attr("class", "tooltip")
 
 
     // zoom and pan
