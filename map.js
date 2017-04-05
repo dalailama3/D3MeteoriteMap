@@ -17,6 +17,7 @@ $("document").ready(function () {
         .attr("width", width)
         .attr("height", height);
 
+
     var path = d3.geo.path()
         .projection(projection);
 
@@ -31,6 +32,30 @@ $("document").ready(function () {
           .append("path")
           .attr("d", path)
     });
+
+    //add meteorite dots to map
+
+    g.selectAll(".dot")
+      .data(result.features)
+      .enter().append("circle")
+      .attr("class", "dot")
+      .attr("cx", function (d) {
+
+        if (d.geometry) {
+          var lat = d.geometry.coordinates[0],
+              lon = d.geometry.coordinates[1];
+          return projection([lat, lon])[0] }
+
+      })
+      .attr("cy", function (d) {
+        if (d.geometry) {
+          var lat = d.geometry.coordinates[0],
+              lon = d.geometry.coordinates[1];
+          return projection([lat, lon])[1] }
+
+      })
+      .attr("r", 2)
+      .attr("fill", "red")
 
     // zoom and pan
     var zoom = d3.behavior.zoom()
