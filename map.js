@@ -42,7 +42,7 @@ $("document").ready(function () {
 
           g.selectAll(".dot")
             .data(result.features.sort(function (feature) {
-              return feature.properties.mass
+              return parseInt(feature.properties.mass);
             }))
             .enter().append("circle")
             .call(tip)
@@ -72,7 +72,7 @@ $("document").ready(function () {
             .attr("fill", function (d) {
               var mass = parseInt(d.properties.mass)
               if (mass < 1000) {
-                return "green";
+                return "blue";
               } else if (mass >= 1000 && mass < 50000) {
                 return "orange";
               } else if (mass >= 50000 && mass < 300000) {

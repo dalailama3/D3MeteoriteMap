@@ -1,16 +1,29 @@
-path {
-  stroke: white;
-  stroke-width: 0.25px;
-  fill: grey;
-  opacity: 0.5;
+body {
+  /*background: steelblue;*/
 }
+
+h1, h2 {
+  display: block;
+  text-align: center;
+}
+
 
 svg {
   display: block;
-  margin-top: 100px;
+  margin-top: 60px;
   margin-left: auto;
   margin-right: auto;
+  background: steelblue;
 }
+
+
+path {
+  stroke: black;
+  stroke-width: 0.25px;
+  fill: darkgreen;
+  opacity: 0.5;
+}
+
 
 /*path:hover {
   cursor: pointer;
@@ -42,20 +55,6 @@ svg {
   top: 100%;
   left: 0;
 }
-
-.hidden {
-  display: none;
-}
-
-/*div.tooltip {
-  color: #222;
-  background: #fff;
-  padding: .5em;
-  text-shadow: black 0 1px 0;
-  border-radius: 2px;
-  opacity: 0.9;
-  position: absolute;
-}*/
 
 circle {
   stroke: white;
