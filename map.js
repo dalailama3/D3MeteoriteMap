@@ -6,8 +6,8 @@ $("document").ready(function () {
     console.log(result)
 
 
-    var width = 900,
-        height = 600;
+    var width = 1200,
+        height = 800;
 
         var projection = d3.geo.mercator()
           .center([0, 5 ])
@@ -41,7 +41,9 @@ $("document").ready(function () {
           //add meteorite dots to map
 
           g.selectAll(".dot")
-            .data(result.features)
+            .data(result.features.sort(function (feature) {
+              return feature.properties.mass
+            }))
             .enter().append("circle")
             .call(tip)
             .attr("class", "dot")
@@ -67,7 +69,20 @@ $("document").ready(function () {
                 return radiusScaling(mass)
               }
             })
-            .attr("fill", "red")
+            .attr("fill", function (d) {
+              var mass = parseInt(d.properties.mass)
+              if (mass < 1000) {
+                return "green";
+              } else if (mass >= 1000 && mass < 50000) {
+                return "orange";
+              } else if (mass >= 50000 && mass < 300000) {
+                return "brown"
+              } else if (mass >= 300000 && mass < 1000000) {
+                return "purple"
+              } else {
+                return "red"
+              }
+            })
             .on("mouseover", tip.show)
             .on("mouseout", tip.hide)
 
@@ -81,7 +96,13 @@ $("document").ready(function () {
     .offset([-10, 0])
     .html(function(d) {
       var properties = d.properties;
-      return "<span>" + properties.mass + "</span>";
+      return "<span>" + "Fall: " + properties.fall + "</span><br>" +
+              "<span>" + "Id: " + properties.id + "</span><br>" +
+              "<span>" + "Mass: " + properties.mass + "</span><br>" +
+              "<span>" + "Name: " + properties.name + "</span><br>" +
+              "<span>" + "Name Type: " + properties.nametype + "</span><br>" +
+              "<span>" + "Class: " + properties.recclass + "</span><br>" +
+              "<span>" + "Year: " + new Date(properties.year).getFullYear() + "</span>"
     })
 
 

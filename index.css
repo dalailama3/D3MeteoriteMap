@@ -5,6 +5,13 @@ path {
   opacity: 0.5;
 }
 
+svg {
+  display: block;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /*path:hover {
   cursor: pointer;
 }*/
@@ -52,8 +59,10 @@ path {
 
 circle {
   stroke: white;
+  opacity: 0.6;
 }
 
 circle:hover {
   cursor: pointer;
+  stroke: black;
 }
